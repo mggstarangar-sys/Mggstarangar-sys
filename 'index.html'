@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MGGS Naveen Taranagar | Official Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        /* Top Utility Bar (RBSE Style) */
+        .top-bar {
+            background-color: #001a33;
+            color: #ffcc00;
+            padding: 6px 20px;
+            font-size: 13px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* Main Header */
+        .header {
+            background: linear-gradient(135deg, #002855, #004080);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 4px solid #ffb800;
+        }
+        .header h1 {
+            font-size: 26px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+        .header p {
+            font-size: 15px;
+            color: #ffde59;
+            margin-top: 5px;
+            font-weight: 500;
+        }
+
+        /* Navigation Bar (Matrix/Board Style) */
+        .nav-bar {
+            background-color: #001a33;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+        }
+        .nav-bar a {
+            color: white;
+            padding: 12px 20px;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+        .nav-bar a:hover {
+            background-color: #003366;
+            border-bottom: 3px solid #ffb800;
+        }
+
+        /* Scrolling Notice Ticker */
+        .ticker-container {
+            background-color: #cc0000;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 8px 15px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .ticker-label {
+            background: #990000;
+            padding: 3px 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        /* Main Container Layout */
+        .container {
+            max-width: 1100px;
+            margin: 20px auto;
+            padding: 0 15px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 20px;
+        }
+        @media (max-width: 768px) {
+            .container { grid-template-columns: 1fr; }
+        }
+
+        /* Cards & Panels */
+        .panel {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+            border-top: 4px solid #002855;
+        }
+        .panel h2 {
+            font-size: 18px;
+            color: #002855;
+            margin-bottom: 12px;
+            border-bottom: 2px solid #f0f0f0;
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Official Notice Board (Matrix Style Feed) */
+        .notice-item {
+            background: #fffbf0;
+            border-left: 4px solid #ffb800;
+            padding: 12px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+        .notice-title { font-size: 15px; font-weight: bold; color: #002855; }
+        .notice-desc { font-size: 13.5px; color: #555; margin-top: 4px; }
+        .notice-date { font-size: 11px; color: #888; margin-top: 6px; display: block; }
+
+        /* Admin Panel (Rehan's Secret Control) */
+        .admin-box {
+            background: #eef2f7;
+            border: 2px dashed #002855;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .admin-box h3 { font-size: 15px; color: #002855; margin-bottom: 10px; }
+        .admin-box input, .admin-box textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 13px;
+        }
+        .admin-box button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        /* Principal Desk Sidebar */
+        .principal-img-box {
+            text-align: center;
+            margin-bottom: 12px;
+        }
+        .principal-badge {
+            background: #002855;
+            color: white;
+            padding: 8px;
+            border-radius: 50%;
+            font-size: 24px;
+            display: inline-block;
+            width: 60px;
+            height: 60px;
+            line-height: 45px;
+        }
+        .principal-info h4 { color: #002855; font-size: 16px; margin-top: 5px; }
+        .principal-info p { color: #666; font-size: 13px; margin-top: 4px; line-height: 1.4; }
+
+        /* Quick Links Grid */
+        .quick-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        .quick-btn {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: center;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #002855;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.2s;
+            text-decoration: none;
+        }
+        .quick-btn:hover {
+            background: #002855;
+            color: white;
+        }
+
+        /* Footer */
+        .footer {
+            background-color: #001a33;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 40px;
+            font-size: 13px;
+        }
+        .developer-tag {
+            color: #ffcc00;
+            font-weight: bold;
+            font-size: 15px;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Utility Bar -->
+    <div class="top-bar">
+        <span>📍 MGGS Naveen Taranagar, Churu (Rajasthan)</span>
+        <span>📞 Helpline: +91 94136 04343</span>
+    </div>
+
+    <!-- Main Header -->
+    <header class="header">
+        <h1>Mahatma Gandhi Government School (Naveen)</h1>
+        <p>An English Medium Smart Gurukul | Affiliated to RBSE</p>
+    </header>
+
+    <!-- Navigation Bar -->
+    <nav class="nav-bar">
+        <a href="#">Home</a>
+        <a href="#">About School</a>
+        <a href="#">Smart Board Classes</a>
+        <a href="#">1st & 2nd Term Results</a>
+        <a href="#">Syllabus (1 to 11)</a>
+        <a href="#">Contact Us</a>
+    </nav>
+
+    <!-- Marquee Notification -->
+    <div class="ticker-container">
+        <span class="ticker-label">LATEST</span>
+        <marquee behavior="scroll" direction="left">
+            🔥 Admissions Open for 2026-27 Session | Digital Syllabus & Term Results Portal is now active under Principal Dr. Ashok Jangir.
+        </marquee>
+    </div>
+
+    <!-- Main Content Grid -->
+    <div class="container">
+
+        <!-- Left Column: Notice Board & Admin Publisher -->
+        <div>
+            <!-- Rehan's Secret Admin Control Panel -->
+            <div class="admin-box">
+                <h3>⚡ Webmaster Control Panel (Admin Live Update)</h3>
+                <input type="text" id="noticeTitle" placeholder="Notice Title (e.g., Class 10 Result Declared)">
+                <textarea id="noticeDesc" rows="2" placeholder="Write full details or updates here..."></textarea>
+                <button onclick="publishNotice()">Publish to Official Board 🚀</button>
+            </div>
+
+            <!-- Official Notice Board -->
+            <div class="panel">
+                <h2>📢 Official Notice Board & Updates</h2>
+                <div id="noticeContainer">
+                    <div class="notice-item">
+                        <div class="notice-title">Welcome to Digital Portal</div>
+                        <div class="notice-desc">The official smart learning and announcement portal has been initialized for classes 1 to 11.</div>
+                        <span class="notice-date">Status: Verified & Live</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Principal Desk & Quick Links -->
+        <div>
+            <!-- Principal Card -->
+            <div class="panel">
+                <h2>Principal's Desk</h2>
+                <div class="principal-img-box">
+                    <div class="principal-badge">👨‍🏫</div>
+                </div>
+                <div class="principal-info">
+                    <h4>Dr. Ashok Jangir</h4>
+                    <p><em>"Our vision is to blend modern digital education with strong core values, turning MGGS Taranagar into a benchmark of excellence."</em></p>
+                </div>
+            </div>
+
+            <!-- Quick Portals -->
+            <div class="panel">
+                <h2>Quick Portals</h2>
+                <div class="quick-links">
+                    <a href="#" class="quick-btn">📊 Class 1-5 Results</a>
+                    <a href="#" class="quick-btn">📈 Class 6-10 Results</a>
+                    <a href="#" class="quick-btn">📚 Class 11 Syllabus</a>
+                    <a href="#" class="quick-btn">🖥️ Smart Classes</a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Professional Footer -->
+    <footer class="footer">
+        <p>© 2026 MGGS Naveen Taranagar, Churu, Rajasthan. All Rights Reserved.</p>
+        <p class="developer-tag">Designed & Developed by Rehan (Lead Tech Founder)</p>
+    </footer>
+
+    <!-- JavaScript for Instant Matrix-Style Live Updates -->
+    <script>
+        window.onload = function() {
+            loadNotices();
+        };
+
+        function publishNotice() {
+            let title = document.getElementById("noticeTitle").value;
+            let desc = document.getElementById("noticeDesc").value;
+
+            if(title === "" || desc === "") {
+                alert("Bhai, title aur description dono bharna zaroori hai!");
+                return;
+            }
+
+            let timeStr = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+            let newNotice = {
+                title: title,
+                desc: desc,
+                time: timeStr
+            };
+
+            let notices = JSON.parse(localStorage.getItem("mggs_board_notices")) || [];
+            notices.unshift(newNotice);
+
+            localStorage.setItem("mggs_board_notices", JSON.stringify(notices));
+
+            document.getElementById("noticeTitle").value = "";
+            document.getElementById("noticeDesc").value = "";
+            loadNotices();
+        }
+
+        function loadNotices() {
+            let container = document.getElementById("noticeContainer");
+            let notices = JSON.parse(localStorage.getItem("mggs_board_notices")) || [];
+
+            let html = `
+                <div class="notice-item">
+                    <div class="notice-title">Welcome to Digital Portal</div>
+                    <div class="notice-desc">The official smart learning and announcement portal has been initialized for classes 1 to 11.</div>
+                    <span class="notice-date">Status: Verified & Live</span>
+                </div>
+            `;
+
+            notices.forEach(item => {
+                html += `
+                    <div class="notice-item">
+                        <div class="notice-title">${item.title}</div>
+                        <div class="notice-desc">${item.desc}</div>
+                        <span class="notice-date">Published: ${item.time} | Verified by Admin</span>
+                    </div>
+                `;
+            });
+
+            container.innerHTML = html;
+        }
+    </script>
+
+</body>
+</html>
